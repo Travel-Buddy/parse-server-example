@@ -5,6 +5,7 @@ Parse.Cloud.define('hello', function(req, res) {
 
 
 Parse.Cloud.afterDelete("Trip", function(request) {
+ Parse.Cloud.useMasterKey;
  query = new Parse.Query("Destination");
  query.equalTo("trip", request.object);
  query.find({
@@ -24,6 +25,7 @@ Parse.Cloud.afterDelete("Trip", function(request) {
 
 
 Parse.Cloud.afterDelete("Destination", function(request) {
+ Parse.Cloud.useMasterKey;
  query = new Parse.Query("Plan");
  query.equalTo("destination", request.object);
  query.find({
