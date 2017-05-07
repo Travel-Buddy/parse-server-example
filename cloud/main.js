@@ -7,22 +7,22 @@ Parse.Cloud.define('hello', function(req, res) {
 
 Parse.Cloud.afterDelete("Trip", function(request) {
   console.log('Parse.serverURL: ' + Parse.serverURL);
- query = new Parse.Query("Destination");
- query.equalTo("trip", request.object);
- query.find({ useMasterKey: true,
-   success: function(destinations) {
-     Parse.Object.destroyAll(destinations, {
-       useMasterKey: true,
-       success: function() {},
-       error: function(error) {
-         console.error("Error deleting related destinations " + error.code + ": " + error.message);
-       }
-     });
-   },
-   error: function(error) {
-     console.error("Error finding related destinations" + error.code + ": " + error.message);
-   }
- });
+//  query = new Parse.Query("Destination");
+//  query.equalTo("trip", request.object);
+//  query.find({ useMasterKey: true,
+//    success: function(destinations) {
+//      Parse.Object.destroyAll(destinations, {
+//        useMasterKey: true,
+//        success: function() {},
+//        error: function(error) {
+//          console.error("Error deleting related destinations " + error.code + ": " + error.message);
+//        }
+//      });
+//    },
+//    error: function(error) {
+//      console.error("Error finding related destinations" + error.code + ": " + error.message);
+//    }
+//  });
 });
 
 
