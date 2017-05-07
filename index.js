@@ -51,5 +51,56 @@ httpServer.listen(port, function() {
     console.log('parse-server-example running on port ' + port + '.');
 });
 
+var parseDashboardConfig = {
+    apps: [
+        {
+          appId:      process.env.APP_ID          || 'myAppId',
+          appName:    process.env.APP_NAME        || 'myAppName',
+          serverURL:  process.env.SERVER_URL      || 'http://localhost:1337/parse',
+          masterKey:  process.env.MASTER_KEY      || 'afesfklafkslsjjksljklfesfesjkl',
+          production: false
+        }
+    ],
+   users: [
+        {
+            user: 'admin'
+        ,   pass: 'password'
+        }
+    ]
+};
+
+var dashboard   = new ParseDashboard(parseDashboardConfig, true);
+
+app.use('/dashboard', dashboard);
+
+
+Parse.Cloud = Object.assign({}, Parse.Cloud, require('parse-server/lib/cloud-code/Parse.Cloud.js'));
+
+
+var CUSTOM_CLASS    = 'Trip';
+
+Parse.Cloud.beforeSave(CUSTOM_CLASS, function(req, res) {
+    console.log('---- BEFORE SAVE RECORD', req);
+    res.success();
+});
+
+Parse.Cloud.afterSave(CUSTOM_CLASS, function(req) {
+    console.log('---- AFTER SAVE RECORD', req);
+});
+
+Parse.Cloud.beforeDelete(CUSTOM_CLASS, function(req, res) {
+    console.log('---- BEFORE DELETE RECORD', req);
+    res.success();
+});
+
+Parse.Cloud.afterDelete(CUSTOM_CLASS, function(req) {
+    console.log('---- AFTER DELETE RECORD', req);
+});
+
+
+
+
+
+
 // This will enable the Live Query real-time server
 ParseServer.createLiveQueryServer(httpServer);
