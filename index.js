@@ -51,6 +51,10 @@ httpServer.listen(port, function() {
     console.log('parse-server-example running on port ' + port + '.');
 });
 
+
+
+var Parse           = require('parse/node').Parse, ParseDashboard  = require('parse-dashboard');
+
 var parseDashboardConfig = {
     apps: [
         {
