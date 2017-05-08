@@ -52,7 +52,29 @@ httpServer.listen(port, function() {
 });
 
 
+var Parse = require('parse/node').Parse,   ParseDashboard  = require('parse-dashboard');
 
+var parseDashboardConfig = {
+    apps: [
+        {
+            appId:      process.env.APP_ID          || 'myAppId'
+        ,   appName:    process.env.APP_NAME        || 'myAppName'
+        ,   serverURL:  process.env.SERVER_URL      || 'http://localhost:1337/parse'
+        ,   masterKey:  process.env.MASTER_KEY      || 'afesfklafkslsjjksljklfesfesjkl'
+        ,   production: false
+        }
+    ]
+,   users: [
+        {
+            user: 'admin'
+        ,   pass: 'password'
+        }
+    ]
+};
+
+var dashboard   = new ParseDashboard(parseDashboardConfig, true);
+
+app.use('/dashboard', dashboard);
 
 
 
