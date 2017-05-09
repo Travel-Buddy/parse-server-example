@@ -1,6 +1,7 @@
 
 Parse.Cloud.define('hello', function(req, res) {
   console.log('Parse.serverURL: ' + Parse.serverURL);
+  res.success('Parse cloud url: ' + __dirname + '/cloud/main.js');
   res.success('Parse.serverURL: ' + Parse.serverURL);
 });
 
